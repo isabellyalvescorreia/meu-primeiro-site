@@ -1,18 +1,30 @@
- // Usamos querySelectorAll para capturar TODOS os botões
-        const botoes = document.querySelectorAll("button");
+// Lógica para os botões de reação nos posts
+const botoesReacao = document.querySelectorAll("article button");
 
-        // Percorremos a lista de botões
-        botoes.forEach(function(botao) {
-            let curtiu = false;
-            botao.addEventListener("click", function() {
-                console.log("fui clicado");
-                let texto = botao.querySelector("span");
-                if (curtiu === false) {
-                    texto.textContent++;
-                    curtiu = true;
-                } else{
-                    texto.textContent --;
-                    curtiu = false;
-                }
-            });
-        });
+botoesReacao.forEach(function(botao) {
+    let curtiu = false; 
+
+    botao.addEventListener("click", function() {
+        const texto = botao.querySelector("span");
+        if (!texto) return;
+
+        let valorAtual = Number(texto.textContent);
+
+        if (!curtiu) {
+            texto.textContent = valorAtual + 1;
+            curtiu = true;
+        } else {
+            texto.textContent = valorAtual - 1;
+            curtiu = false;
+        }
+    });
+});
+
+// Lógica para alternar o tema escuro
+const btnTema = document.querySelector(".btn-tema-escuro");
+
+if (btnTema) {
+    btnTema.addEventListener("click", function() {
+        document.body.classList.toggle("tema-escuro");
+    });
+}
